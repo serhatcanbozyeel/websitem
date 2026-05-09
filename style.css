@@ -10,23 +10,33 @@ body{
 }
 
 .scroll-container {
-  width: 100%;
-  overflow: hidden; /* Dışarı taşanları gizle */
-  white-space: nowrap; /* Yazıları tek satıra zorla */
-  color: white;
-  
+  width: 100%;           /* Tekrar tam ekran yapıyoruz */
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: transparent; /* İsteğine göre renk verebilirsin */
+  display: flex;
+  align-items: center;
 }
 
 .scroll-content {
-  display: inline-block;
-  animation: sonsuz-kaydir 10s linear infinite;
+  display: flex; /* inline-block yerine flex kullanıyoruz */
+  width: max-content; /* İçeriğin genişliğini otomatik hesaplar */
+  animation: sonsuz-kaydir 25s linear infinite;
+  will-change: transform;
 }
 
 .scroll-content span {
-  display: inline-block;
-  padding-right: 40px; /* Metinler arasındaki boşluk */
-  font-family: sans-serif;
-  font-weight: bold;
+  display: block;
+  padding-right: 100px; /* Kelimeler arası net boşluk */
+  white-space: nowrap;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Daha modern bir font */
+    font-weight: 800;             /* Yazıyı iyice kalınlaştırır */
+    font-size: 1.5rem;           /* Masaüstünde daha okunaklı boyut */
+    color: white;                /* Yazı rengini beyaza sabitler */
+    text-transform: uppercase;   /* Tüm harfleri büyük yapar */
+    
+    /* Opsiyonel: Yazıya hafif bir gölge ekleyerek daha belirgin yapabilirsin */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes sonsuz-kaydir {
@@ -34,10 +44,12 @@ body{
     transform: translateX(0);
   }
   100% {
-    /* İçerik iki kez tekrarlandığı için %50 kaydırmak pürüzsüz döngü sağlar */
+    /* Yazıların tam yarısına geldiğinde başa döner. 
+       Yazı çok uzun olduğu için kullanıcı bunu fark etmez. */
     transform: translateX(-50%);
   }
 }
+
 
 .kaydirmali-galeri {
   display: flex;
@@ -73,6 +85,32 @@ body{
   scroll-snap-align: center;
   border-radius: 15px;
   overflow: hidden;
+}
+/* Mevcut kodlarının altına bu bloğu ekle */
+
+@media (min-width: 1024px) {
+  .kaydirmali-galeri {
+    flex-wrap: wrap;       /* Masaüstünde yan yana dizilsinler */
+    overflow-x: visible;   /* Kaydırma çubuğuna gerek yok */
+    justify-content: center; /* Kartları ortala */
+    gap: 25px;            /* Aradaki boşluğu biraz açalım */
+  }
+
+  .galeri-item {
+    flex: 0 0 calc(25% - 25px); /* 4'lü dizilim (Boşlukları hesaba katar) */
+    min-width: 250px;           /* Çok daralmasınlar */
+    scroll-snap-align: none;    /* Masaüstünde "tak" diye oturma özelliğini kapat */
+    transition: transform 0.3s ease; /* Hover efekti için */
+  }
+
+  .galeri-item:hover {
+    transform: scale(1.05);     /* Üzerine gelince hafif büyüme */
+    z-index: 10;
+  }
+
+  .galeri-item img {
+    height: 400px; /* Masaüstünde biraz daha uzun durabilirler */
+  }
 }
 
 
@@ -343,4 +381,21 @@ body{
 /* Sola kaydırıldığında eklenecek sınıf */
 .sola-kaydi {
     transform: translateX(-80px);
+}
+/* Masaüstü ekranlar için ayarlar */
+@media (min-width: 1024px) {
+  body {
+    font-size: 18px; /* Yazıları biraz büyütelim */
+    background-color: #f4f4f4;
+  }
+
+  .container {
+    width: 80%; /* İçeriği ekranın ortasına sabitleyelim */
+    margin: 0 auto;
+  }
+
+  .menu {
+    display: flex; /* Menüyü yan yana getirelim */
+    justify-content: space-between;
+  }
 }
