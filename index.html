@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Serhat & Naz</title>
+</head>
+<body>
+    <div class="header">
+        <div class="scroll-container">
+  <div class="scroll-content">
+    <span>SENİ ÇOOOOOOOOOOOOOOOOOOOOOOOOK SEVİYORUM </span>
+    <span>SENİ ÇOOOOOOOOOOOOOOOOOOOOOOOOK SEVİYORUM </span>
+  </div>
+</div> 
+    </div>
+<!-- İLK BÖLÜM -->
+   <div class="kaydirmali-galeri">
+  <div class="galeri-item">
+    <img src="images/Picsart_22-07-23_19-35-40-916.jpg" alt="Görsel 1">
+    <div class="yazi-katmani">
+      <h3>Vampir "Naz"</h3>
+      <p>Köşeye sıkıştırmak için en uygun anı bekler. Isırığı hafife alınamaz.</p>
+    </div>
+  </div>
+  <div class="galeri-item">
+    <img src="images/Picsart_22-07-23_12-19-22-163.jpg" alt="Görsel 2">
+    <div class="yazi-katmani">
+      <h3>Uykucu "Naz"</h3>
+      <p>Uykusu geldiğinde kimse onu tutamaz.(Uyurken bile duruşunu bozmaz)</p>
+    </div>
+  </div>
+  <div class="galeri-item">
+    <img src="images/Picsart_22-07-16_17-51-20-549.jpg" alt="Görsel 3">
+    <div class="yazi-katmani">
+      <h3>Aşçı "Naz"</h3>
+      <p>Eli çok lezzetlidir ancak ojeleri her şeyden önemlidir.</p>
+    </div>
+  </div>
+  <div class="galeri-item">
+    <img src="images/IMG-20220716-WA0036.jpg" alt="Görsel 4">
+    <div class="yazi-katmani">
+      <h3>Cinnet "Naz"</h3>
+      <p>Her şeyin mükemmel olması gerek yoksa cinnet onun vazgeçilmezidir.</p>
+    </div>
+  </div>
+</div>
+<!-- İKİNCİ BÖLÜM -->
+<div class="kaydirmali-galeri">
+  <div class="galeri-item">
+    <img src="images/20220705_224306.jpg" alt="Görsel 1">
+    <div class="yazi-katmani">
+      <h3>Kişisel bakım "Serhat"</h3>
+      <p>Duşunu alıp vücut bakımına önem vermesi kokusunu hissettiriyor.</p>
+    </div>
+  </div>
+  <div class="galeri-item">
+    <img src="images/20220705_224132.jpg" alt="Görsel 2">
+    <div class="yazi-katmani">
+      <h3>Aç "Serhat"</h3>
+      <p>Sabah Akşam Aşçı "Naz" ın yaptıklarını yiyerek göbek yaptı. (Hala aç ve doymuyor)</p>
+    </div>
+  </div>
+  <div class="galeri-item">
+    <img src="images/20220705_223625.jpg" alt="Görsel 3">
+    <div class="yazi-katmani">
+      <h3>Meteoroloji "Serhat"</h3>
+      <p>Hava Durumu onun vazgeçilmezidir nefesini bile hava durumuna göre alır.</p>
+    </div>
+  </div>
+  <div class="galeri-item">
+    <img src="images/20220705_223543.jpg" alt="Görsel 4">
+    <div class="yazi-katmani">
+      <h3>Çemberli "Serhat"</h3>
+      <p>Hiçbir şeyi kafasına takmayıp kendini ve sevdiğini önemser (Serhat: Sadece çember takarlarr!!)</p>
+    </div>
+  </div>
+</div>
+    
+
+<div id="oyun-alani">
+    <!-- Oyun içindeki küçük çıkış butonu -->
+    <button id="oyun-ici-cikis" onclick="anaMenuyeDon()" style="display: none;">✖</button>
+
+    <div id="skor-tablosu">Skor: <span id="skor">0</span></div>
+    <p id="oyun-mesaji">Hazır mısın? ❤️</p>
+    
+    <!-- GİRİŞ EKRANI -->
+    <div id="giris-ekrani">
+        <h2>Kalp Yakalama Oyunu</h2>
+        <p>Boşluğa basmadan kalpleri topla!</p>
+        <button class="ana-buton" onclick="oyunuBaslat()">Oyunu Başlat</button>
+    </div>
+
+    <!-- KAYIP EKRANI -->
+    <div id="kayip-ekranı" style="display: none;">
+        <h2>Eyvah! Boşluğa Bastın!</h2>
+        <p id="final-skor">Skor: 0</p>
+        <div class="buton-grubu">
+            <button class="ana-buton" onclick="oyunuBaslat()">Tekrar Dene</button>
+            <button class="cikis-buton" onclick="anaMenuyeDon()">Çıkış Yap</button>
+        </div>
+    </div>
+</div>
+
+<div class="not-gonder-konteynir">
+  <h3>Dilediğini yazabilirsin📝</h3>
+  <textarea id="not-input" placeholder="Mesajını buraya yaz..."></textarea>
+  <button id="gonder-btn">Gönder</button>
+
+  <div id="not-listesi">
+    <!-- Gönderilen notlar burada görünecek -->
+  </div>
+</div>
+
+<script>// --- ELEMENT SEÇİCİLER ---
+const oyunAlani = document.getElementById('oyun-alani');
+const skorGostergesi = document.getElementById('skor');
+const mesajGostergesi = document.getElementById('oyun-mesaji');
+const girisEkrani = document.getElementById('giris-ekrani');
+const kayipEkrani = document.getElementById('kayip-ekranı');
+const finalSkorGostergesi = document.getElementById('final-skor');
+const cikisButonu = document.getElementById('oyun-ici-cikis');
+
+// --- OYUN DEĞİŞKENLERİ ---
+let skor = 0;
+let kalpHizi = 1000; // Başlangıçta 1 saniyede bir kalp
+let oyunDongusu;
+let oyunDevamEdiyor = false;
+
+// --- 1. ANA MENÜYE DÖNÜŞ (ÇIKIŞ) FONKSİYONU ---
+function anaMenuyeDon() {
+    oyunDevamEdiyor = false;
+    clearInterval(oyunDongusu);
+    
+    // Ekrandaki kalpleri temizle
+    document.querySelectorAll('.kalp').forEach(k => k.remove());
+    
+    // Görünürlüğü ayarla
+    girisEkrani.style.display = 'flex';
+    kayipEkrani.style.display = 'none';
+    cikisButonu.style.display = 'none';
+    
+    // Başlıkları sıfırla
+    mesajGostergesi.innerText = "Hazır mısın? ❤️";
+    skorGostergesi.innerText = "0";
+}
+
+// --- 2. OYUNU BAŞLATMA FONKSİYONU ---
+function oyunuBaslat() {
+    // Ekranları temizle ve ayarla
+    girisEkrani.style.display = 'none';
+    kayipEkrani.style.display = 'none';
+    cikisButonu.style.display = 'block'; // Oyun içi çıkış butonunu göster
+    
+    // Değerleri sıfırla
+    skor = 0;
+    kalpHizi = 1000;
+    oyunDevamEdiyor = true;
+    
+    skorGostergesi.innerText = skor;
+    mesajGostergesi.innerText = "Kalpleri yakala! ❤️";
+
+    // Varsa eski kalpleri temizle
+    document.querySelectorAll('.kalp').forEach(k => k.remove());
+
+    // Döngüyü kur
+    clearInterval(oyunDongusu);
+    oyunDongusu = setInterval(kalpOlustur, kalpHizi);
+}
+
+// --- 3. KALP OLUŞTURMA MANTIĞI ---
+function kalpOlustur() {
+    if (!oyunDevamEdiyor) return;
+
+    const kalp = document.createElement('div');
+    kalp.classList.add('kalp');
+    kalp.innerHTML = '❤️';
+    
+    // Üst kısımdaki (skor, mesaj, X butonu) alanı korumak için:
+    const ustBosluk = 30; // Üstten 70 piksellik yasaklı bölge
+    
+    // Genişlik hesabı aynı kalıyor
+    const x = Math.random() * (oyunAlani.clientWidth - 45);
+    
+    // Yüksekliği (y), üst boşluğu hesaba katarak hesaplıyoruz
+    // Rastgele sayı (Oyun Alanı Yüksekliği - Üst Boşluk - Kalp Boyutu) + Üst Boşluk
+    const y = Math.random() * (oyunAlani.clientHeight - ustBosluk - 45) + ustBosluk;
+    
+    kalp.style.left = `${x}px`;
+    kalp.style.top = `${y}px`;
+    
+    kalp.addEventListener('pointerdown', (e) => {
+        e.stopPropagation(); 
+        if (!oyunDevamEdiyor) return;
+
+        skor++;
+        skorGostergesi.innerText = skor;
+        kalp.remove();
+        
+        if (skor % 5 === 0 && kalpHizi > 250) {
+            kalpHizi -= 150;
+            mesajGostergesi.innerText = "Hızlanıyor! 🔥";
+            clearInterval(oyunDongusu);
+            oyunDongusu = setInterval(kalpOlustur, kalpHizi);
+        }
+    });
+
+    oyunAlani.appendChild(kalp);
+    setTimeout(() => { if (kalp.parentElement) kalp.remove(); }, 1500);
+}
+
+// --- 4. BOŞLUĞA DOKUNMA (KAYBETME) KONTROLÜ ---
+oyunAlani.addEventListener('pointerdown', (e) => {
+    // Sadece oyun aktifken ve tam olarak pembe alana dokunulmuşsa
+    if (oyunDevamEdiyor && e.target === oyunAlani) {
+        oyunuKaybet();
+    }
+});
+
+// --- 5. KAYBETME FONKSİYONU ---
+function oyunuKaybet() {
+    oyunDevamEdiyor = false;
+    clearInterval(oyunDongusu);
+    cikisButonu.style.display = 'none'; // Kaybedince çıkış çarpısını gizle
+    
+    finalSkorGostergesi.innerText = "Skor: " + skor;
+    kayipEkrani.style.display = 'flex'; // Kayıp ekranını göster
+}
+
+// Oyun sayfa yüklendiğinde "Giriş Ekranı" ile bekler. 
+// "Oyunu Başlat" butonuna basılınca oyunuBaslat() çalışır.</script>
+
+<script>const notInput = document.getElementById('not-input');
+const gonderBtn = document.getElementById('gonder-btn');
+const notListesi = document.getElementById('not-listesi');
+
+// 1. Sayfa açıldığında eski mesajları yükle
+window.addEventListener('load', () => {
+    const eskiMesajlar = JSON.parse(localStorage.getItem('mesaj_listesi')) || [];
+    eskiMesajlar.forEach(m => notuEkranaEkle(m.text, m.date));
+});
+
+// 2. Gönder butonuna basıldığında
+gonderBtn.addEventListener('click', () => {
+    const mesajText = notInput.value.trim();
+    
+    if (mesajText !== "") {
+        const tarih = new Date().toLocaleString('tr-TR'); // Güncel tarih-saat
+        
+        // Ekrana ekle
+        notuEkranaEkle(mesajText, tarih);
+        
+        // Hafızaya kaydet
+        mesajıKaydet(mesajText, tarih);
+        
+        // Inputu temizle
+        notInput.value = "";
+    } else {
+        alert("Lütfen boş bir mesaj göndermeyin.");
+    }
+});
+
+// Notu HTML olarak ekleyen fonksiyon
+function notuEkranaEkle(text, date) {
+    const yeniNot = document.createElement('div');
+    yeniNot.classList.add('not-item');
+    yeniNot.innerHTML = `
+        <div>${text}</div>
+        <span>${date}</span>
+    `;
+    // Yeni notu en üste ekle
+    notListesi.prepend(yeniNot);
+}
+
+// LocalStorage'a dizi olarak kaydeden fonksiyon
+function mesajıKaydet(text, date) {
+    const mesajlar = JSON.parse(localStorage.getItem('mesaj_listesi')) || [];
+    mesajlar.push({ text: text, date: date });
+    localStorage.setItem('mesaj_listesi', JSON.stringify(mesajlar));
+}</script>
+<script>let touchStartX = 0;
+let touchEndX = 0;
+
+function notuEkranaEkle(text, date) {
+    const yeniNot = document.createElement('div');
+    yeniNot.classList.add('not-item');
+    
+    yeniNot.innerHTML = `
+        <div class="not-sil-katman">SİL</div>
+        <div class="not-icerik" 
+             ontouchstart="handleTouchStart(event)" 
+             ontouchend="handleTouchEnd(event, this, '${date}')">
+            <div>${text}</div>
+            <span style="font-size:0.7rem; color:#999;">${date}</span>
+        </div>
+    `;
+    
+    notListesi.prepend(yeniNot);
+}
+
+function handleTouchStart(e) {
+    touchStartX = e.changedTouches[0].screenX;
+}
+
+function handleTouchEnd(e, element, tarih) {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe(element, tarih);
+}
+
+function handleSwipe(element, tarih) {
+    const mesafe = touchStartX - touchEndX;
+
+    // Eğer sola doğru 50px'den fazla kaydırıldıysa
+    if (mesafe > 50) {
+        element.classList.add('sola-kaydi');
+        
+        // 2 saniye sonra eğer hala silinmediyse geri kapansın (opsiyonel)
+        setTimeout(() => {
+            if (element.classList.contains('sola-kaydi')) {
+                element.classList.remove('sola-kaydi');
+            }
+        }, 3000);
+    } 
+    // Eğer sağa doğru kaydırılırsa kapat
+    else if (mesafe < -30) {
+        element.classList.remove('sola-kaydi');
+    }
+}
+
+// Silme işlemini tetiklemek için sil katmanına tıklama ekleyelim
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('not-sil-katman')) {
+        const notKutusu = e.target.parentElement;
+        const tarih = notKutusu.querySelector('span').innerText;
+        
+        notKutusu.style.transform = "translateX(-100%)";
+        notKutusu.style.opacity = "0";
+        
+        setTimeout(() => {
+            notKutusu.remove();
+            // Hafızadan silme fonksiyonunu çağır (önceki kodundaki aynı mantık)
+            notuHafizadanSil(tarih);
+        }, 300);
+    }
+});
+
+function notuHafizadanSil(tarih) {
+    let mesajlar = JSON.parse(localStorage.getItem('mesaj_listesi')) || [];
+    mesajlar = mesajlar.filter(m => m.date !== tarih);
+    localStorage.setItem('mesaj_listesi', JSON.stringify(mesajlar));
+}</script>
+</body>
+</html>

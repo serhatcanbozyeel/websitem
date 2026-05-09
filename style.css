@@ -1,0 +1,346 @@
+.header{
+    background-color: #ff1493;
+    margin-left: -8px;
+    margin-right: -8px;
+    margin-top: -8px;
+    padding: 20px;
+}
+body{
+    background-color:white;
+}
+
+.scroll-container {
+  width: 100%;
+  overflow: hidden; /* Dışarı taşanları gizle */
+  white-space: nowrap; /* Yazıları tek satıra zorla */
+  color: white;
+  
+}
+
+.scroll-content {
+  display: inline-block;
+  animation: sonsuz-kaydir 10s linear infinite;
+}
+
+.scroll-content span {
+  display: inline-block;
+  padding-right: 40px; /* Metinler arasındaki boşluk */
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+@keyframes sonsuz-kaydir {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* İçerik iki kez tekrarlandığı için %50 kaydırmak pürüzsüz döngü sağlar */
+    transform: translateX(-50%);
+  }
+}
+
+.kaydirmali-galeri {
+  display: flex;
+  flex-wrap: nowrap;      /* Fotoğrafların alt satıra geçmesini engeller */
+  overflow-x: auto;       /* Yatayda taşma olduğunda kaydırma çubuğu ekler */
+  gap: 15px;              /* Fotoğraflar arası boşluk */
+  padding: 20px;
+  scroll-snap-type: x mandatory; /* Kaydırırken fotoğrafların "tak" diye oturmasını sağlar */
+  -webkit-overflow-scrolling: touch; /* iOS cihazlarda kaydırmayı pürüzsüzleştirir */
+}
+
+/* Kaydırma çubuğunu gizlemek istersen (daha şık görünür) */
+.kaydirmali-galeri::-webkit-scrollbar {
+  display: none;
+}
+
+.galeri-item {
+  scroll-snap-align: center; /* Kaydırma bitince fotoğrafı ortalar */
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.galeri-item img {
+  width: 100%;
+  height: 350px;          /* İsteğine göre yüksekliği sabitleyebilirsin */
+  object-fit: cover;      /* Fotoğrafın kutuyu düzgün doldurmasını sağlar */
+  display: block;
+}
+.galeri-item {
+  position: relative; /* Yazının bu kutuya göre konumlanması için şart */
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+
+/* Yazının üzerine geleceği karanlık katman (Okunabilirliği artırır) */
+.yazi-katmani {
+  position: absolute;
+  bottom: 0;         /* Yazıyı en alta yasla */
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8)); /* Alttan üste doğru kararma */
+  color: white;
+  box-sizing: border-box; /* Padding'in genişliği etkilemesini engeller */
+}
+
+.yazi-katmani h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.yazi-katmani p {
+  margin: 5px 0 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+#oyun-alani {
+  width: 100%;
+  height: 300px;
+  background-color: #fff0f5; /* Hafif pembe arka plan */
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  margin: 20px 0;
+  border: 2px dashed #ff69b4;
+  touch-action: none; /* Mobilde kaydırmayı engeller, sadece oyuna odaklar */
+}
+
+#skor-tablosu {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-weight: bold;
+  color: #ff1493;
+  z-index: 10;
+}
+
+#oyun-mesaji {
+  text-align: center;
+  color: #ff69b4;
+  margin-top: 10px;
+}
+
+.kalp {
+  position: absolute;
+  font-size: 30px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.1s;
+}
+
+.kalp:active {
+  transform: scale(1.5); /* Dokununca büyüme efekti */
+}
+
+#kayip-ekranı {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 105, 180, 0.9); /* Pembe şeffaf arka plan */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    color: white;
+}
+
+#kayip-ekranı button {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 20px;
+    background: white;
+    color: #ff1493;
+    cursor: pointer;
+    font-weight: bold;
+}
+/* Her iki ekran için ortak stil */
+#giris-ekrani, #kayip-ekranı {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 105, 180, 0.95); /* Belirgin pembe */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    color: white;
+    text-align: center;
+}
+
+#giris-ekrani button, #kayip-ekranı button {
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 25px;
+    background: white;
+    color: #ff1493;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+}
+
+#giris-ekrani button:active, #kayip-ekranı button:active {
+    transform: scale(0.95);
+}
+/* Oyun içindeki çarpı butonu */
+#oyun-ici-cikis {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    z-index: 150;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ff1493;
+}
+
+/* Buton Grupları */
+.buton-grubu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.ana-buton {
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 25px;
+    background: white;
+    color: #ff1493;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.cikis-buton {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.not-gonder-konteynir {
+  padding: 20px;
+  background: #fff;
+  margin: 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+#not-input {
+  width: 100%;
+  height: 80px;
+  padding: 15px;
+  border: 2px solid #f0f0f0;
+  border-radius: 12px;
+  resize: none;
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+}
+
+#gonder-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  background: #ff69b4; /* Oyun temasıyla uyumlu */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#gonder-btn:active {
+  transform: scale(0.98);
+  background: #ff1493;
+}
+
+#not-listesi {
+  margin-top: 20px;
+  max-height: 200px;
+  overflow-y: auto; /* Çok not birikirse kaydırılabilir olsun */
+}
+
+.not-item {
+  background: #fdf2f8;
+  padding: 0px;
+  border-radius: 10px;
+  border-left: 4px solid #ff69b4;
+  margin-bottom: 10px;
+  animation: kayarakGel 0.3s ease-out;
+}
+
+.not-item span {
+  display: block;
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 5px;
+}
+
+@keyframes kayarakGel {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.not-item {
+    position: relative;
+    background: #ff1493; /* Arka planda silme rengi (Kırmızı/Pembe) */
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden; /* Dışarı taşan butonu gizle */
+    touch-action: pan-y; /* Sadece dikey kaydırmaya izin ver, yatayı biz yöneteceğiz */
+}
+
+.not-icerik {
+    position: relative;
+    background: #fdf2f8;
+    padding: 15px;
+    border-left: 4px solid #ff69b4;
+    z-index: 2;
+    transition: transform 0.3s ease; /* Kayma animasyonu */
+    cursor: grab;
+}
+
+.not-sil-katman {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    z-index: 1;
+}
+
+/* Sola kaydırıldığında eklenecek sınıf */
+.sola-kaydi {
+    transform: translateX(-80px);
+}
