@@ -399,3 +399,489 @@ body{
     justify-content: space-between;
   }
 }
+
+/* Firebase'den Gelecek Fotoğraflı Anıların Galeri Tasarımı */
+#memories-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.memory-card {
+  background: #fdf2f8;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  width: 250px;
+  overflow: hidden;
+  padding: 12px;
+  border: 1px solid #ffb6c1;
+  box-sizing: border-box;
+  animation: kayarakGel 0.4s ease-out;
+}
+
+.memory-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.memory-card p {
+  font-size: 0.95rem;
+  margin: 10px 0 5px 0;
+  color: #333;
+  font-family: inherit;
+  font-weight: 600;
+  word-wrap: break-word;
+}
+
+.memory-card small {
+  display: block;
+  color: #a1a1a1;
+  font-size: 0.75rem;
+  margin-top: 5px;
+}
+
+/* ========================================================
+   YENİ FOTOĞRAF & NOT EKLEME ALANI SÜSLEMELERİ
+   ======================================================== */
+
+/* Ana Kutu Konteyneri */
+.not-gonder-konteynir {
+    background: #ffffff;
+    border: 2px solid #ffb6c1;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 24px rgba(255, 20, 147, 0.08);
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+
+.not-gonder-konteynir h3 {
+    color: #ff1493;
+    font-size: 1.6rem;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Form Satırları */
+.form-satir {
+    margin-bottom: 20px;
+}
+
+.form-satir label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #ff1493;
+    font-size: 1rem;
+}
+
+/* Süslü Dosya Seçme Alanı (Dropzone Görünümü) */
+.dosya-sec-stil {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    border: 3px dashed #ff69b4;
+    border-radius: 15px;
+    background: #fff5f8;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.dosya-sec-stil:hover {
+    background: #ffe4ee;
+    border-color: #ff1493;
+    transform: scale(1.01);
+}
+
+.dosya-sec-stil input[type="file"] {
+    display: none; /* Gerçek çirkin butonu gizliyoruz */
+}
+
+.dosya-sec-stil .ikon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.dosya-sec-stil .metin {
+    color: #db2777;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* Süslü Not Yazma Alanı */
+.not-gonder-konteynir textarea {
+    width: 100%;
+    height: 110px;
+    border: 2px solid #ffb6c1;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    resize: vertical;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: #fafafa;
+}
+
+.not-gonder-konteynir textarea:focus {
+    outline: none;
+    border-color: #ff1493;
+    background: #ffffff;
+    box-shadow: 0 0 8px rgba(255, 20, 147, 0.15);
+}
+
+/* Süslü Kaydet Butonu */
+#save-btn {
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    color: white;
+    border: none;
+    padding: 14px;
+    width: 100%;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+    transition: all 0.3s ease;
+}
+
+#save-btn:hover {
+    background: linear-gradient(135deg, #ff1493, #c2185b);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
+}
+
+#save-btn:disabled {
+    background: #cbd5e1;
+    color: #94a3b8;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ========================================================
+   YENİ SERGİLEME ALANI (POLAROID GALERİ) SÜSLEMELERİ
+   ======================================================== */
+#memories-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    margin-top: 35px;
+    padding: 10px;
+}
+
+/* Polaroid Kart Tasarımı */
+.memory-card {
+    background: #ffffff;
+    padding: 12px 12px 24px 12px; /* Alt tarafı beyaz bant gibi geniş bıraktık */
+    border-radius: 4px; /* Polaroid gibi düz köşeli */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 260px;
+    box-sizing: border-box;
+    border: 1px solid #eaeaea;
+    transition: all 0.3s ease;
+    animation: kayarakGel 0.5s ease-out;
+}
+
+/* Her karta rastgele hafif nostaljik bir eğim vereceğiz (hoverda düzelecek) */
+.memory-card:nth-child(odd) { transform: rotate(-2deg); }
+.memory-card:nth-child(even) { transform: rotate(2deg); }
+
+.memory-card:hover {
+    transform: rotate(0deg) scale(1.05) translateY(-5px);
+    box-shadow: 0 12px 28px rgba(255, 20, 147, 0.15);
+    z-index: 10;
+}
+
+/* Fotoğraf Alanı */
+.memory-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border: 1px solid #f0f0f0;
+    border-radius: 2px;
+}
+
+/* Not Yazısı */
+.memory-card p {
+    font-size: 0.95rem;
+    margin: 15px 0 8px 0;
+    color: #4a4a4a;
+    font-weight: 600;
+    line-height: 1.4;
+    word-wrap: break-word;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Tarih Alanı */
+.memory-card small {
+    display: block;
+    color: #999;
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-align: right;
+}
+
+/* ========================================================
+   TAM EKRAN FOTOĞRAF AÇMA (LIGHTBOX) SÜSLEMELERİ
+   ======================================================== */
+
+/* Arka plandaki koyu transparan katman */
+.modal-katman {
+    display: none; /* İlk başta gizli */
+    position: fixed;
+    z-index: 9999; /* Her şeyin en üstünde görünsün */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9); /* %90 siyahlık */
+    backdrop-filter: blur(5px); /* Arka planı hafifçe bulandırır */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ekrana gelecek büyük resim */
+.modal-icerik {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: 8px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+    border: 3px solid #ffffff;
+    
+    /* Açılış animasyonu (Büyüyerek gelme) */
+    animation-name: zoomlama;
+    animation-duration: 0.3s;
+}
+
+@keyframes zoomlama {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Kapatma Butonu (X) */
+.modal-kapat {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    user-select: none;
+}
+
+.modal-kapat:hover {
+    color: #ff69b4; /* Üzerine gelince pembeye dönsün */
+    transform: scale(1.1);
+}
+
+/* Telefonlar için küçük ekran optimizasyonu */
+@media only screen and (max-width: 700px){
+    .modal-icerik {
+        width: 95%;
+    }
+    .modal-kapat {
+        top: 15px;
+        right: 20px;
+        font-size: 40px;
+    }
+}
+
+/* Tıklanabilir görseller için fare imlecini el işareti yap */
+.memory-card img {
+    cursor: zoom-in;
+}
+
+/* ========================================================
+   POLAROID ANI SİLME BUTONU STİLLERİ
+   ======================================================== */
+.memory-card {
+    position: relative; /* Butonun kart içinde konumlanması için şart */
+}
+
+.ani-sil-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(255, 255, 255, 0.85);
+    color: #ff1493; /* Pembe renk */
+    border: 1px solid #ffb6c1;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    opacity: 0; /* İlk başta gizli */
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Fare Polaroid kartın üzerine geldiğinde silme butonu yavaşça belürsin */
+.memory-card:hover .ani-sil-btn {
+    opacity: 1;
+}
+
+/* Butonun üzerine gelindiğinde kırmızımsı pembeye dönsün ve büyüsün */
+.ani-sil-btn:hover {
+    background: #ff1493;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(255, 20, 147, 0.4);
+}
+
+/* ========================================================
+   MASAÜSTÜ & MOBİL OPTİMİZASYON KODLARI
+   ======================================================== */
+
+/* Genel Konteyner Sınırlandırması (Taşmaları Önlemek İçin) */
+.not-gonder-konteynir {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+/* Dokunmatik Cihazlarda Hover Efektini Yumuşatma */
+@media (hover: none) {
+    /* Mobilde kartlar sürekli eğik kalmasın, dokununca büyüsün */
+    .memory-card:nth-child(odd), 
+    .memory-card:nth-child(even) { 
+        transform: rotate(0deg); 
+    }
+    .memory-card:active {
+        transform: scale(0.98);
+        background-color: #fff0f5;
+    }
+    /* Mobilde silme butonu her zaman hafifçe görünsün (çünkü mouse hover yok) */
+    .ani-sil-btn {
+        opacity: 0.85;
+        width: 32px; /* Mobilde daha rahat basılsın diye hafif büyüttük */
+        height: 32px;
+    }
+}
+
+/* Tablet ve Mobil Ekranlar İçin (Genişlik 768px ve altı) */
+@media screen and (max-width: 768px) {
+    .not-gonder-konteynir {
+        margin: 20px 10px;
+        padding: 15px;
+        border-radius: 16px;
+    }
+
+    .not-gonder-konteynir h3 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+
+    /* Sürükle bırak / dosya seçme alanını mobilde büyütüyoruz */
+    .dosya-sec-stil {
+        padding: 30px 15px;
+    }
+
+    .dosya-sec-stil .ikon {
+        font-size: 2.5rem;
+    }
+
+    /* Parmakla rahat yazılsın diye padding artırıldı */
+    .not-gonder-konteynir textarea {
+        font-size: 16px; /* Mobilde odaklanınca tarayıcının zoom yapmasını engeller */
+        padding: 10px;
+    }
+
+    /* Kaydet butonu mobilde tam ekran genişliğinde ve kalın */
+    #save-btn {
+        padding: 16px;
+        font-size: 1rem;
+    }
+
+    /* Polaroid galeri yerleşimi mobil optimizasyonu */
+    #memories-gallery {
+        gap: 15px;
+        padding: 5px;
+    }
+
+    .memory-card {
+        width: calc(50% - 10px); /* Yan yana tam iki kart sığdırır */
+        min-width: 145px; /* Çok küçük ekranlarda kırılmasın */
+        padding: 8px 8px 16px 8px;
+    }
+
+    .memory-card img {
+        height: 130px; /* Mobilde fotoğraflar dikey alanı çok kaplamasın */
+    }
+
+    .memory-card p {
+        font-size: 0.85rem;
+        margin: 8px 0 4px 0;
+    }
+}
+
+/* Çok Küçük Telefonlar İçin (Genişlik 480px ve altı) */
+@media screen and (max-width: 480px) {
+    .memory-card {
+        width: 100%; /* Kartlar alt alta tam genişlik kaplar */
+        max-width: 300px;
+    }
+    
+    .memory-card img {
+        height: 200px;
+    }
+}
+
+/* ========================================================
+   KALP OYUNU MASAÜSTÜ GENİŞLİK & YÜKSEKLİK ORANTI AYARI
+   ======================================================== */
+
+#oyun-alani {
+    max-width: 500px;        /* Masaüstünde çok yayılmasın diye genişliği sabitledik */
+    height: 500px;           /* Genişlikle aynı yaparak tam bir kare (1:1) oranı yakaladık */
+    margin: 40px auto;       /* Sayfayı ortaladık ve alt-üst boşluk verdik */
+    background: #fff0f5;     /* Tatlı pembe arka plan oyun sahnesi */
+    border: 3px dashed #ff69b4;
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;        /* Kalplerin bu kutunun dışına taşmasını engeller */
+    box-shadow: 0 10px 25px rgba(255, 20, 147, 0.1);
+    box-sizing: border-box;
+}
+
+/* Oyun içi giriş ve kayıp ekranlarının bu kutuya tam oturması için */
+#giris-ekrani, #kayip-ekranı {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* MOBİL EKRANLAR İÇİN ORANTI DÜZELTMESİ (768px ve altı) */
+@media screen and (max-width: 768px) {
+    #oyun-alani {
+        max-width: 95%;      /* Mobilde ekranın kenarlarına tam otursun */
+        height: 400px;       /* Telefon dik durduğu için yüksekliği mobilde biraz daralttık */
+        margin: 20px auto;
+        border-radius: 16px;
+    }
+}
